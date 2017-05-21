@@ -15,6 +15,7 @@
 		0A2BE81F1ECCC63600E3EFC3 /* music_guessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2BE81E1ECCC63600E3EFC3 /* music_guessTests.swift */; };
 		0A2BE82A1ECCC63600E3EFC3 /* music_guessUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2BE8291ECCC63600E3EFC3 /* music_guessUITests.swift */; };
 		0A2BE83B1ECCC89400E3EFC3 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A2BE83A1ECCC89400E3EFC3 /* MediaPlayer.framework */; };
+		0A78F3B31ED1A39800B136DD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A78F3B21ED1A39800B136DD /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		0A2BE8291ECCC63600E3EFC3 /* music_guessUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = music_guessUITests.swift; sourceTree = "<group>"; };
 		0A2BE82B1ECCC63600E3EFC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A2BE83A1ECCC89400E3EFC3 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		0A78F3B21ED1A39800B136DD /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				0A2BE8091ECCC63500E3EFC3 /* AppDelegate.swift */,
 				0A2BE80B1ECCC63500E3EFC3 /* ViewController.swift */,
 				0A2BE80D1ECCC63500E3EFC3 /* Main.storyboard */,
+				0A78F3B21ED1A39800B136DD /* HomeViewController.swift */,
 				0A2BE8101ECCC63500E3EFC3 /* Assets.xcassets */,
 				0A2BE8121ECCC63500E3EFC3 /* LaunchScreen.storyboard */,
 				0A2BE8151ECCC63500E3EFC3 /* Info.plist */,
@@ -274,6 +277,7 @@
 			files = (
 				0A2BE80C1ECCC63500E3EFC3 /* ViewController.swift in Sources */,
 				0A2BE80A1ECCC63500E3EFC3 /* AppDelegate.swift in Sources */,
+				0A78F3B31ED1A39800B136DD /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
