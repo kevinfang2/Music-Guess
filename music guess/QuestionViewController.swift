@@ -28,7 +28,7 @@ class QuestionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         question.layer.cornerRadius = 50;
-        
+     
         
 
         // Do any additional setup after loading the view.
