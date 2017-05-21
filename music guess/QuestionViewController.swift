@@ -11,23 +11,9 @@ import UIKit
 class QuestionViewController: UIViewController {
 
     var chosenIndex = 0;
-    @IBOutlet weak var question: UIImageView!
-    
-    @IBAction func option1(_ sender: Any) {
-    }
-    
-    @IBAction func option2(_ sender: Any) {
-    }
-
-    @IBAction func option3(_ sender: Any) {
-    }
-    
-    @IBAction func option4(_ sender: Any) {
-    }
-     
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        question.layer.cornerRadius = 50;
      
         
 

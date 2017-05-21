@@ -13,7 +13,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate{
 
     var dict:[String:AnyObject]!
     var mediaPicker: MPMediaPickerController?
-//    var myMusicPlayer: MPMusicPlayerController?
+    var nowPlaying: MPMediaItem?
     var musicPlayer: MPMusicPlayerController {
         if musicPlayer_Lazy == nil {
             musicPlayer_Lazy = MPMusicPlayerController.systemMusicPlayer()
@@ -25,28 +25,14 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate{
                                object: musicPlayer_Lazy)
             musicPlayer_Lazy!.beginGeneratingPlaybackNotifications()
         }
-        
         return musicPlayer_Lazy!
     }
-    
     private var musicPlayer_Lazy: MPMusicPlayerController?
-    
-    var nowPlaying: MPMediaItem?
-
-    @IBOutlet weak var question: UIImageView!
-    
-    @IBAction func one(_ sender: Any) {
-    }
-    @IBAction func two(_ sender: Any) {
-    }
-    @IBAction func three(_ sender: Any) {
-    }
-    @IBAction func four(_ sender: Any) {
-    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         MPMediaLibrary.requestAuthorization { (status) in
             if status == .authorized {
                 print("authorized");
@@ -57,8 +43,9 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate{
     
     func play(){
         let mediaItems = MPMediaQuery.songs().items
+        let random = randomInt(max: ((mediaItems?.count)! - 1));
         
-        let mediaCollection = MPMediaItemCollection(items: mediaItems!)
+        let mediaCollection = MPMediaItemCollection(items: [mediaItems![random]])
         
         
         musicPlayer.setQueue(with: mediaCollection)
@@ -66,7 +53,7 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate{
 
         nowPlaying = musicPlayer.nowPlayingItem
 
-        print(nowPlaying?.title!);
+        print((nowPlaying?.title)!);
 
         let when = DispatchTime.now() + 6
         DispatchQueue.main.asyncAfter(deadline: when) {
