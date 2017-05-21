@@ -14,6 +14,60 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate{
     var dict:[String:AnyObject]!
     var mediaPicker: MPMediaPickerController?
     var nowPlaying: MPMediaItem?
+    var songTitleCollection:[String]!
+    var correct:String!
+    var points:Int!
+    var counter:Int!
+    var timeElapsed:Int!
+    var timer:Timer!
+    
+    @IBOutlet weak var pointTitle: UINavigationItem!
+    @IBOutlet weak var labelOne: UILabel!
+    @IBOutlet weak var labelTwo: UILabel!
+    @IBOutlet weak var labelThree: UILabel!
+    @IBOutlet weak var labelFour: UILabel!
+    
+    @IBAction func button1(_ sender: Any) {
+        if(labelOne.text == correct){
+            points! += (Int)(20/(timeElapsed! + 1));
+        }
+        else{
+            points! -= 10;
+        }
+        afterAnswer()
+    }
+    
+    @IBAction func button2(_ sender: Any) {
+        if(labelTwo.text == correct){
+            points! += (Int)(20/(timeElapsed! + 1));
+        }
+        else{
+            points! -= 10;
+        }
+        afterAnswer()
+    }
+    
+    @IBAction func button3(_ sender: Any) {
+        if(labelThree.text == correct){
+            points! += (Int)(20/(timeElapsed! + 1));
+        }
+        else{
+            points! -= 10;
+        }
+        afterAnswer()
+    }
+    
+    @IBAction func button4(_ sender: Any) {
+        if(labelFour.text == correct){
+            points! += (Int)(20/(timeElapsed! + 1));
+        }
+        else{
+            points! -= 10;
+        }
+        afterAnswer()
+    }
+    
+    
     var musicPlayer: MPMusicPlayerController {
         if musicPlayer_Lazy == nil {
             musicPlayer_Lazy = MPMusicPlayerController.systemMusicPlayer()
@@ -32,6 +86,12 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        counter = 0;
+        points = 0;
+        timeElapsed = 0;
+        pointTitle.title = String(points);
+        
+        songTitleCollection = [String].init();
         
         MPMediaLibrary.requestAuthorization { (status) in
             if status == .authorized {
@@ -42,27 +102,71 @@ class ViewController: UIViewController, MPMediaPickerControllerDelegate{
     }
     
     func play(){
-        let mediaItems = MPMediaQuery.songs().items
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.counterTimer), userInfo: nil, repeats: true)
+        timer.fire();
+        
+        var mediaItems = MPMediaQuery.songs().items
         let random = randomInt(max: ((mediaItems?.count)! - 1));
         
+        
         let mediaCollection = MPMediaItemCollection(items: [mediaItems![random]])
+        correct = (mediaItems?[random].title)!;
+
+        songTitleCollection.append((mediaItems?[random].title)!);
+        mediaItems?.remove(at: random);
         
-        
+        for x in 0 ..< 3 {
+            let random = randomInt(max: ((mediaItems?.count)! - 1));
+            songTitleCollection.append((mediaItems?[random].title)!);
+            mediaItems?.remove(at: random);
+        }
+
         musicPlayer.setQueue(with: mediaCollection)
         musicPlayer.play()
 
         nowPlaying = musicPlayer.nowPlayingItem
 
         print((nowPlaying?.title)!);
-
-        let when = DispatchTime.now() + 6
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            self.musicPlayer.stop();
+        DispatchQueue.main.async {
+            var same = self.songTitleCollection
+            
+            let random = randomInt(max: ((same?.count)! - 1));
+            self.labelOne.text = same?[random];
+            same?.remove(at: random);
+            
+            let random2 = randomInt(max: ((same?.count)! - 1));
+            self.labelTwo.text = same?[random2];
+            same?.remove(at: random2);
+            
+            let random3 = randomInt(max: ((same?.count)! - 1));
+            self.labelThree.text = same?[random3];
+            same?.remove(at:random3);
+            
+            self.labelFour.text = same?[0];
+            self.songTitleCollection = [String].init();
         }
     }
     
     func playingItemDidChange(notification: NSNotification) {
         nowPlaying = musicPlayer.nowPlayingItem
+    }
+    
+    func afterAnswer(){
+        counter! += 1;
+        if(counter == 10){
+            //present next thing
+        }
+        print(timeElapsed!);
+        timeElapsed! = 0;
+        timer.invalidate();
+        
+        self.pointTitle.title = String(points);
+        musicPlayer.stop()
+        self.play();
+    }
+    
+    func counterTimer() {
+        timeElapsed! += 1
     }
     
     func displayMediaLibraryError() {
